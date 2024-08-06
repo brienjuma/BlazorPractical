@@ -1,4 +1,4 @@
-﻿<EditForm FormName="Registration" Model="@Person">
+﻿<EditForm FormName="Registration" Model="@Person" OnSubmit="HandleSubmit">
 
     <div class="form-group row my-2">
         <label for="PersonId" class="col-sm-1 col-form-label">ID</label>
@@ -29,4 +29,9 @@
     public Person? Person { get; set; }
     protected override void OnInitialized() => Person ??= new();
 
+    private void HandleSubmit()
+    {
+        Console.WriteLine(Person?.ToString() ?? "null value");
+        Person = new Person();
+    }
 }
