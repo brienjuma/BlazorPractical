@@ -1,4 +1,7 @@
-﻿namespace BlazorPractical.Services;
+﻿using BlazorPractical.Models;
+using Dapper;
+
+namespace BlazorPractical.Services;
 
 public class PersonService
 {
@@ -9,7 +12,7 @@ public class PersonService
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Person>> GetPeopleAsync()
+    public async Task<IEnumerable<Person>> GetAllPeopleAsync()
     {
         var sql = "SELECT PersonId, FirstName, LastName FROM sp_people";
 

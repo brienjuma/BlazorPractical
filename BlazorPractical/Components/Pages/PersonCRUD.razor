@@ -1,4 +1,6 @@
-﻿@*Person Registration Form*@
+﻿@inject PersonService PersonService
+
+@*Person Registration Form*@
 <EditForm FormName="Registration" Model="@Person" OnSubmit="HandleSubmit">
 
     <div class="form-group row my-2">
@@ -58,16 +60,24 @@
 
 @code {
     public Person? Person { get; set; }
-    private List<Person> people = [];
+    private IEnumerable<Person> people = [];
     protected override void OnInitialized()
     {
         Person ??= new();
-        people.Add(new Person { PersonId = "1", FirstName = "Stanley", LastName = "Omondi" });
     }
 
     private void HandleSubmit()
     {
         Console.WriteLine(Person?.ToString() ?? "null value");
         Person = new Person();
+    }
+
+    private async Task LoadDBRecordsAsync()
+    {
+        people = await PersonService.GetAllPeopleAsync();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDBRecordsAsync();
     }
 }
