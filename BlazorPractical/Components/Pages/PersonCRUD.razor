@@ -1,27 +1,27 @@
 ﻿<EditForm FormName="Registration" Model="@Person">
 
-    <div class="">
-        <label for="PersonId">ID</label>
-        <div>
-            <InputText id="PersonId" @bind-Value="Person.PersonId" />
+    <div class="form-group row my-2">
+        <label for="PersonId" class="col-sm-1 col-form-label">ID</label>
+        <div class="col-sm-2">
+            <InputText id="PersonId" @bind-Value="Person.PersonId" class="form-control" placeholder="PID001" />
         </div>
     </div>
 
-    <div class="">
-        <label for="FirstName">Firstname</label>
-        <div>
-            <InputText id="FirstName" @bind-Value="Person.FirstName" />
+    <div class="form-group row my-2">
+        <label for="FirstName" class="col-sm-1 col-form-label">Firstname</label>
+        <div class="col-sm-2">
+            <InputText id="FirstName" @bind-Value="Person.FirstName" class="form-control" placeholder="Jane" />
         </div>
     </div>
 
-    <div class="">
-        <label for="LastName">Lastname</label>
-        <div>
-            <InputText id="LastName" @bind-Value="Person.LastName" />
+    <div class="form-group row my-2">
+        <label for="LastName" class="col-sm-1 col-form-label">Lastname</label>
+        <div class="col-sm-2">
+            <InputText id="LastName" @bind-Value="Person.LastName" class="form-control" placeholder="Doe" />
         </div>
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary col-sm-1 my-3">Submit</button>
 </EditForm>
 
 
