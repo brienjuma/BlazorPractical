@@ -1,0 +1,32 @@
+﻿<EditForm FormName="Registration" Model="@Person">
+
+    <div class="">
+        <label for="PersonId">ID</label>
+        <div>
+            <InputText id="PersonId" @bind-Value="Person.PersonId" />
+        </div>
+    </div>
+
+    <div class="">
+        <label for="FirstName">Firstname</label>
+        <div>
+            <InputText id="FirstName" @bind-Value="Person.FirstName" />
+        </div>
+    </div>
+
+    <div class="">
+        <label for="LastName">Lastname</label>
+        <div>
+            <InputText id="LastName" @bind-Value="Person.LastName" />
+        </div>
+    </div>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+@code {
+    public Person? Person { get; set; }
+    protected override void OnInitialized() => Person ??= new();
+
+}
