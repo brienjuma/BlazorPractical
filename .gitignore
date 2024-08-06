@@ -1,0 +1,80 @@
+# IDE
+.vs/
+.vscode/
+
+# .NET Core
+*.db
+*.ds_store
+*.swp
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+**/[Bb]in/
+**/[Dd]ebug/
+**/[Rr]elease/
+**/[Oo]bj/
+**/[Tt]est[Rr]esults/
+**/[Ll]og/
+**/node_modules/
+**/out/
+**/[Pp]ublish/
+**/.vscode/
+**/.vs/
+**/.idea/
+**/*.pidb
+**/*.pdb
+**/*.opendb
+
+# Rider project files
+.idea/
+.idea_modules/
+.idea_modules.iml
+*.iws
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Web specific files
+*.log
+*.xml
+*.sql
+*.sqlite
+
+# Rider
+.idea/
+.idea_modules/
+.idea_modules.iml
+
+# Linux/Mac file system
+.DS_Store
+._.DS_Store
+
+# JetBrains Rider
+.idea/
+*.sublime-*
+.idea_modules/
+.idea_modules.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# File-based package management
+packages.config
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
