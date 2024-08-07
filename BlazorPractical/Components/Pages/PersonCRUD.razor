@@ -52,7 +52,11 @@
                         <td>@person.PersonId</td>
                         <td>@person.FirstName</td>
                         <td>@person.LastName</td>
-                        <td>Edit | Delete</td>
+                        <td>
+                            <span role="button" class="text-info" @onclick="() => EditPerson(person.PersonId)">Edit</span>
+                            <span> | </span>
+                            Delete
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -93,6 +97,10 @@
         Person = new Person();
     }
 
+    public async Task EditPerson(string personId)
+    {
+        Person = await PersonService.GetPersonByIdAsync(personId);
+    }
     protected override async Task OnInitializedAsync()
     {
         await LoadDBRecordsAsync();
