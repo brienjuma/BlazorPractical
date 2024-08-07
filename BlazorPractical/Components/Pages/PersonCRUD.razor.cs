@@ -25,20 +25,11 @@ namespace BlazorPractical.Components.Pages
 
         private IEnumerable<Person> people = [];
 
-        protected override void OnInitialized()
-        {
-            Person ??= new Person();
-        }
+        protected override void OnInitialized() => Person ??= new Person();
 
-        protected override async Task OnInitializedAsync()
-        {
-            await LoadDBRecordsAsync();
-        }
+        protected override async Task OnInitializedAsync() => await LoadDBRecordsAsync();
 
-        private async Task LoadDBRecordsAsync()
-        {
-            people = await PersonService.GetAllPeopleAsync();
-        }
+        private async Task LoadDBRecordsAsync() => people = await PersonService.GetAllPeopleAsync();
 
         private async Task HandleValidSubmit()
         {
