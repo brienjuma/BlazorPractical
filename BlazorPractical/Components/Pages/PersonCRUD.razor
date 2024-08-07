@@ -59,23 +59,26 @@
 
 
 @code {
+    [SupplyParameterFromForm(FormName = "Registration")]
     public Person? Person { get; set; }
     private IEnumerable<Person> people = [];
     protected override void OnInitialized()
     {
         Person ??= new();
     }
-
-    private void HandleSubmit()
-    {
-        Console.WriteLine(Person?.ToString() ?? "null value");
-        Person = new Person();
-    }
-
     private async Task LoadDBRecordsAsync()
     {
         people = await PersonService.GetAllPeopleAsync();
     }
+
+    private async Task HandleSubmit()
+    {
+        await PersonService.AddPersonAsync(Person);
+        Console.WriteLine(Person?.ToString() ?? "null value");
+        LoadDBRecordsAsync();
+        Person = new Person();
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await LoadDBRecordsAsync();

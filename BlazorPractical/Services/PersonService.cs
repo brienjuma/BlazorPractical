@@ -23,5 +23,12 @@ public class PersonService
 
     }
 
-
+    public async Task AddPersonAsync(Person person)
+    {
+        var sql = "INSERT INTO sp_people(PersonId, FirstName, LastName) VALUES(@PersonId, @FirstName, @LastName)";
+        using (var connection = _dbContext.DatabaseConnection())
+        {
+            await connection.ExecuteAsync(sql, person);
+        }
+    }
 }
