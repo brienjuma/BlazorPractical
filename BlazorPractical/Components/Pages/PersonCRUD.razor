@@ -1,12 +1,14 @@
 ﻿@inject PersonService PersonService
 
 @*Person Registration Form*@
-<EditForm FormName="Registration" Model="@Person" OnSubmit="HandleSubmit">
+<EditForm FormName="Registration" Model="@Person" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
 
     <div class="form-group row my-2">
         <label for="PersonId" class="col-sm-1 col-form-label">ID</label>
         <div class="col-sm-2">
             <InputText id="PersonId" @bind-Value="Person.PersonId" class="form-control" placeholder="PID001" />
+            <ValidationMessage For="@(() => Person.PersonId)" />
         </div>
     </div>
 
@@ -14,6 +16,7 @@
         <label for="FirstName" class="col-sm-1 col-form-label">Firstname</label>
         <div class="col-sm-2">
             <InputText id="FirstName" @bind-Value="Person.FirstName" class="form-control" placeholder="Jane" />
+            <ValidationMessage For="@(() => Person.FirstName)" />
         </div>
     </div>
 
@@ -21,6 +24,7 @@
         <label for="LastName" class="col-sm-1 col-form-label">Lastname</label>
         <div class="col-sm-2">
             <InputText id="LastName" @bind-Value="Person.LastName" class="form-control" placeholder="Doe" />
+            <ValidationMessage For="@(() => Person.LastName)" />
         </div>
     </div>
 
@@ -60,7 +64,7 @@
 
 @code {
     [SupplyParameterFromForm(FormName = "Registration")]
-    public Person? Person { get; set; }
+    public Person Person { get; set; }
     private IEnumerable<Person> people = [];
     protected override void OnInitialized()
     {
@@ -71,7 +75,7 @@
         people = await PersonService.GetAllPeopleAsync();
     }
 
-    private async Task HandleSubmit()
+    private async Task HandleValidSubmit()
     {
         await PersonService.AddPersonAsync(Person);
         Console.WriteLine(Person?.ToString() ?? "null value");
