@@ -32,13 +32,13 @@ public class PersonService
         }
     }
 
-    public async Task<Person> GetPersonByIdAsync(string personId)
+    public async Task<Person> GetPersonByIdAsync(string PersonId)
     {
         var sql = "SELECT PersonId, FirstName, LastName FROM sp_people WHERE PersonId = @PersonId";
 
         using (var connection = _dbContext.DatabaseConnection())
         {
-            return await connection.QuerySingleOrDefaultAsync<Person>(sql, new { PersonId = personId });
+            return await connection.QuerySingleOrDefaultAsync<Person>(sql, new { PersonId });
         }
     }
 
@@ -51,12 +51,12 @@ public class PersonService
         }
     }
 
-    public async Task DeletePersonAsync(string personId)
+    public async Task DeletePersonAsync(string PersonId)
     {
         var sql = "DELETE FROM sp_people WHERE PersonId = @PersonId";
         using (var connection = _dbContext.DatabaseConnection())
         {
-            await connection.ExecuteAsync(sql, new { PersonId = personId });
+            await connection.ExecuteAsync(sql, new { PersonId });
         }
     }
 }
