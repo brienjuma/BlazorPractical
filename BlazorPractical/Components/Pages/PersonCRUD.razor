@@ -61,54 +61,5 @@
                 }
             </tbody>
         </table>
-
     }
 </div>
-
-
-@code {
-    [SupplyParameterFromForm(FormName = "Registration")]
-    public Person Person { get; set; }
-    private IEnumerable<Person> people = [];
-    protected override void OnInitialized()
-    {
-        Person ??= new();
-    }
-    private async Task LoadDBRecordsAsync()
-    {
-        people = await PersonService.GetAllPeopleAsync();
-    }
-
-    private async Task HandleValidSubmit()
-    {
-        @* Logs form input *@
-        @* Console.WriteLine(Person?.ToString() ?? "null value"); *@
-
-        if (await PersonService.GetPersonByIdAsync(Person.PersonId) != null)
-        {
-            await PersonService.UpdatePersonAsync(Person);
-        }
-        else
-        {
-            await PersonService.AddPersonAsync(Person);
-        }
-
-        await LoadDBRecordsAsync();
-        Person = new Person();
-    }
-
-    public async Task EditPerson(string personId)
-    {
-        Person = await PersonService.GetPersonByIdAsync(personId);
-    }
-
-    private async Task DeletePerson(string personId)
-    {
-        await PersonService.DeletePersonAsync(personId);
-        await LoadDBRecordsAsync();
-    }
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadDBRecordsAsync();
-    }
-}
