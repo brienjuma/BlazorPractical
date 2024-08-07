@@ -31,4 +31,23 @@ public class PersonService
             await connection.ExecuteAsync(sql, person);
         }
     }
+
+    public async Task<Person> GetPersonByIdAsync(string personId)
+    {
+        var sql = "SELECT PersonId, FirstName, LastName FROM sp_people WHERE PersonId = @PersonId";
+
+        using (var connection = _dbContext.DatabaseConnection())
+        {
+            return await connection.QuerySingleOrDefaultAsync<Person>(sql, new { PersonId = personId });
+        }
+    }
+
+    public async Task UpdatePersonAsync(Person person)
+    {
+        var sql = "UPDATE sp_people SET FirstName = @FirstName, LastName = @LastName WHERE PersonId = @PersonId";
+        using (var connection = _dbContext.DatabaseConnection())
+        {
+            await connection.ExecuteAsync(sql, person);
+        }
+    }
 }

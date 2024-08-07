@@ -77,9 +77,19 @@
 
     private async Task HandleValidSubmit()
     {
-        await PersonService.AddPersonAsync(Person);
-        Console.WriteLine(Person?.ToString() ?? "null value");
-        LoadDBRecordsAsync();
+        @* Logs form input *@
+        @* Console.WriteLine(Person?.ToString() ?? "null value"); *@
+
+        if (await PersonService.GetPersonByIdAsync(Person.PersonId) != null)
+        {
+            await PersonService.UpdatePersonAsync(Person);
+        }
+        else
+        {
+            await PersonService.AddPersonAsync(Person);
+        }
+
+        await LoadDBRecordsAsync();
         Person = new Person();
     }
 
