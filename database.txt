@@ -1,0 +1,9 @@
+CREATE database westsidedb;
+
+use database westsidedb;
+
+CREATE TABLE sp_people (
+    PersonId STRING PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL
+);
