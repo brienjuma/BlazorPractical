@@ -50,4 +50,13 @@ public class PersonService
             await connection.ExecuteAsync(sql, person);
         }
     }
+
+    public async Task DeletePersonAsync(string personId)
+    {
+        var sql = "DELETE FROM sp_people WHERE PersonId = @PersonId";
+        using (var connection = _dbContext.DatabaseConnection())
+        {
+            await connection.ExecuteAsync(sql, new { PersonId = personId });
+        }
+    }
 }
