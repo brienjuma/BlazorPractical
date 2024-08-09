@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace BlazorPractical.Services;
+namespace BlazorPractical.Services.DbContext;
 
 public class DatabaseContext
 {

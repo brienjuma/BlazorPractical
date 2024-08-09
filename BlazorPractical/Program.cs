@@ -1,5 +1,6 @@
 using BlazorPractical.Components;
-using BlazorPractical.Services;
+using BlazorPractical.Services.DbContext;
+using BlazorPractical.Services.PersonManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<DatabaseContext>();
-builder.Services.AddScoped<PersonService>();
+builder.Services.AddSingleton<IPersonService>(new PersonService(DatabaseContext context));
 
 var app = builder.Build();
 
