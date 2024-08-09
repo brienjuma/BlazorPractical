@@ -14,7 +14,7 @@ using Microsoft.JSInterop;
 using BlazorPractical;
 using BlazorPractical.Components;
 using BlazorPractical.Models;
-using BlazorPractical.Services;
+using BlazorPractical.Services.PersonManagement;
 
 namespace BlazorPractical.Components.Pages
 {
@@ -29,20 +29,19 @@ namespace BlazorPractical.Components.Pages
 
         protected override async Task OnInitializedAsync() => await LoadDBRecordsAsync();
 
-        private async Task LoadDBRecordsAsync() => people = await PersonService.GetAllPeopleAsync();
+        private async Task LoadDBRecordsAsync() => people = await PersonService.GetAllAsync();
 
         private async Task HandleValidSubmit()
         {
-            // Logs form input
-            // Console.WriteLine(Person?.ToString() ?? "null value");
+            // Console.WriteLine(Person?.ToString() ?? "person == null");
 
-            if (await PersonService.GetPersonByIdAsync(Person.PersonId) != null)
+            if (await PersonService.GetByIdAsync(Person.PersonId) != null)
             {
-                await PersonService.UpdatePersonAsync(Person);
+                await PersonService.UpdateAsync(Person);
             }
             else
             {
-                await PersonService.AddPersonAsync(Person);
+                await PersonService.AddAsync(Person);
             }
 
             await LoadDBRecordsAsync();
@@ -51,12 +50,12 @@ namespace BlazorPractical.Components.Pages
 
         public async Task EditPerson(string personId)
         {
-            Person = await PersonService.GetPersonByIdAsync(personId);
+            Person = await PersonService.GetByIdAsync(personId);
         }
 
         private async Task DeletePerson(string personId)
         {
-            await PersonService.DeletePersonAsync(personId);
+            await PersonService.DeleteAsync(personId);
             await LoadDBRecordsAsync();
         }
     }

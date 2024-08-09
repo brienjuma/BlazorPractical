@@ -9,7 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSingleton<DatabaseContext>();
-builder.Services.AddSingleton<IPersonService>(new PersonService(DatabaseContext context));
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 
