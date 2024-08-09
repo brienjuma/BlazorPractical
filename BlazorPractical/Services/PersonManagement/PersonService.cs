@@ -1,9 +1,9 @@
 ﻿using BlazorPractical.Models;
 using Dapper;
 
-namespace BlazorPractical.Services;
+namespace BlazorPractical.Services.PersonManagement;
 
-public class PersonService
+public class PersonService : IPersonService
 {
     private readonly DatabaseContext _dbContext;
 
@@ -11,8 +11,7 @@ public class PersonService
     {
         _dbContext = dbContext;
     }
-
-    public async Task<IEnumerable<Person>> GetAllPeopleAsync()
+    public async Task<IEnumerable<Person>> GetAllAsync()
     {
         var sql = "SELECT PersonId, FirstName, LastName FROM sp_people";
 
@@ -20,10 +19,9 @@ public class PersonService
         {
             return await connection.QueryAsync<Person>(sql);
         }
-
     }
 
-    public async Task AddPersonAsync(Person person)
+    public async Task AddAsync(Person person)
     {
         var sql = "INSERT INTO sp_people(PersonId, FirstName, LastName) VALUES(@PersonId, @FirstName, @LastName)";
         using (var connection = _dbContext.DatabaseConnection())
@@ -32,17 +30,17 @@ public class PersonService
         }
     }
 
-    public async Task<Person> GetPersonByIdAsync(string PersonId)
+    public async Task<Person> GetByIdAsync(string id)
     {
         var sql = "SELECT PersonId, FirstName, LastName FROM sp_people WHERE PersonId = @PersonId";
 
         using (var connection = _dbContext.DatabaseConnection())
         {
-            return await connection.QuerySingleOrDefaultAsync<Person>(sql, new { PersonId });
+            return await connection.QuerySingleOrDefaultAsync<Person>(sql, new { PersonId = id });
         }
     }
 
-    public async Task UpdatePersonAsync(Person person)
+    public async Task UpdateAsync(Person person)
     {
         var sql = "UPDATE sp_people SET FirstName = @FirstName, LastName = @LastName WHERE PersonId = @PersonId";
         using (var connection = _dbContext.DatabaseConnection())
@@ -51,12 +49,12 @@ public class PersonService
         }
     }
 
-    public async Task DeletePersonAsync(string PersonId)
+    public async Task DeleteAsync(string id)
     {
         var sql = "DELETE FROM sp_people WHERE PersonId = @PersonId";
         using (var connection = _dbContext.DatabaseConnection())
         {
-            await connection.ExecuteAsync(sql, new { PersonId });
+            await connection.ExecuteAsync(sql, new { PersonId = id });
         }
     }
 }
