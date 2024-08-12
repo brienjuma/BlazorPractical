@@ -1,27 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using static Microsoft.AspNetCore.Components.Web.RenderMode;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.JSInterop;
-using BlazorPractical;
-using BlazorPractical.Components;
 using BlazorPractical.Models;
-using BlazorPractical.Services.PersonManagement;
 
 namespace BlazorPractical.Components.Pages
 {
     public partial class PersonCRUD
     {
         [SupplyParameterFromForm(FormName = "Registration")]
-        public Person Person { get; set; }
+        private Person Person { get; set; } = new();
 
         private IEnumerable<Person> people = [];
 
