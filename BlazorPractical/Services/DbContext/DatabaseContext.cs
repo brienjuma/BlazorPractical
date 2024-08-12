@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace BlazorPractical.Services.DbContext;
 
-public class DatabaseContext
+public class DatabaseContext : IDatabaseContext
 {
     private readonly IConfiguration _configuration;
     private readonly string _connectionString;

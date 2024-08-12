@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<DatabaseContext>();
+builder.Services.AddSingleton<IDatabaseContext,DatabaseContext>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
